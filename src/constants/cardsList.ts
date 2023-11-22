@@ -65,33 +65,39 @@ export const cards: CardType[] = [
     image:
       "https://d3eif34l41063f.cloudfront.net/prod/694351/2023/11/1700577500.jpg",
   },
-  // {
-  //   brand: "Delonghi",
-  //   price: "270€",
-  //   linkToProduct:
-  //     "https://www.cdiscount.com/electromenager/petit-dejeuner-cafe/machine-expresso-automatique-avec-broyeur-delong/f-1101727-bundelonghitasse.html?idOffre=2893247466#cm_sp=PA:12269985:NH:CAR",
-  //   position: "center",
-  //   image:
-  //     "https://www.cafemichel.fr/331/machine-expresso-delonghi-magnifica.jpg",
-  // },
-  // {
-  //   brand: "Toptro",
-  //   price: "150€",
-  //   linkToProduct:
-  //     "https://www.amazon.fr/dp/B0BDK6QTHX/?coliid=I3AY9T7CAV3YVZ&colid=7532RQ6K5TCN&psc=1&ref_=list_c_wl_lv_ov_lig_dp_it",
-  //   position: "center",
-  //   image:
-  //     "https://www.toptro.com/cdn/shop/files/6_1024x1024@2x.jpg?v=1690190074",
-  // },
-  // {
-  //   brand: "Nike",
-  //   price: "120€",
-  //   linkToProduct:
-  //     "https://www.zalando.fr/nike-sportswear-dunk-retro-baskets-basses-whiteblack-ni112o0gn-a11.html?size=43&allophones=0&wmc=SEM330_NB_GO._7455046171_205187277_11471707197.&opc=2211&mpp=google|v1||pla-297612067635||9056511||g|c||56861993277||pla|NI112O0GN-A110095000|297612067635|1|&gclsrc=aw.ds&gad_source=1&gclid=EAIaIQobChMIstKgqLPSggMVWC4GAB1o6gSmEAQYAyABEgILRvD_BwE",
-  //   position: "bottom",
-  //   image:
-  //     "https://img01.ztat.net/article/spp-media-p1/ad8cde9c9d2745f4b714dfc872e64b9a/dbfd82f0b4d146138ca60ccb0ad1fe94.jpg?imwidth=1800",
-  // },
+  {
+    brand: "Delonghi",
+    price: "270€",
+    width: '245px',
+    height: '245px',
+    linkToProduct:
+      "https://www.cdiscount.com/electromenager/petit-dejeuner-cafe/machine-expresso-automatique-avec-broyeur-delong/f-1101727-bundelonghitasse.html?idOffre=2893247466#cm_sp=PA:12269985:NH:CAR",
+    position: "center",
+    image:
+      "https://www.maxicoffee.com/images/products/large/magnifica_delonghi_22.140.b_profil.jpg",
+  },
+  {
+    brand: "Toptro",
+    price: "99€",
+    width: '245px',
+    height: '245px',
+    linkToProduct:
+      "https://www.cdiscount.com/high-tech/televiseurs/tr-23-mini-projecteur-videoprojecteur-8000-lumen/f-1062603-yab6941260498456.html?cid=search_pla&cm_mmc=PLA!COR!!MP!17321694237!m644520687_pYAB6941260498456-2513263431_l9056493_tpla-294682000766__a137602897192&gad_source=1&gclid=EAIaIQobChMI4KTf94TWggMVHkNBAh1ntApVEAQYAiABEgLvpvD_BwE",
+    position: "center",
+    image:
+      "https://boostit.cdiscount.com/wp-content/uploads/2023/02/61kargeojhl.jpg",
+  },
+  {
+    brand: "Nike",
+    price: "120€",
+    width: '245px',
+    height: '245px',
+    linkToProduct:
+      "https://www.nike.com/fr/t/chaussure-dunk-low-retro-pour-dd36JB/DD1391-100?nikemt=true&cp=72359269459_search_&Macro=--g-10690195814-108495198474--c-FR-cssproducts-453050557176-pla-333563063426-9056493-00194502876048&gad_source=1&gclid=EAIaIQobChMI1r3OpoTWggMV94ZoCR05OgEQEAQYBCABEgJLLfD_BwE&gclsrc=aw.ds",
+    position: "bottom",
+    image:
+      "https://d3eif34l41063f.cloudfront.net/prod/694351/2023/11/1700602078.png",
+  },
   {
     brand: "Nike",
     price: "130€",
@@ -103,13 +109,15 @@ export const cards: CardType[] = [
     image:
       "https://d3eif34l41063f.cloudfront.net/prod/694351/2023/11/1700577586.jpg",
   },
-  // {
-  //   brand: "Octobre",
-  //   price: "135€",
-  //   linkToProduct:
-  //     "https://www.octobre-editions.com/fr/product/pull-coper/ecru",
-  //   position: "center",
-  //   image:
-  //     "https://media.octobre-editions.com/image/upload/twr7crk9bdz35ln2g149.jpg",
-  // },
-];
+  {
+    brand: "Octobre",
+    price: "135€",
+    width: '245px',
+    height: '390.46px',
+    linkToProduct:
+      "https://www.octobre-editions.com/fr/product/pull-coper/ecru",
+    position: "center",
+    image:
+      "https://media.octobre-editions.com/image/upload/twr7crk9bdz35ln2g149.jpg",
+  },
+]

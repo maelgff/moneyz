@@ -21,8 +21,10 @@ export const CustomCard: React.FC<Props> = ({ card }) => {
           src={card.image}
           mixBlendMode="multiply"
           borderRadius="10px"
+          cursor="pointer"
           w={card.width}
           h={card.height}
+          onClick={() => window.open(card.linkToProduct, "_blank")?.focus()}
         />
       </Box>
       <Box>
