@@ -1,6 +1,6 @@
 import React from 'react'
 import { Box, Card, CardHeader, Heading, Image } from '@chakra-ui/react'
-import { CardType } from '../App'
+import { CardType } from 'src/components/Homepage'
 
 interface Props {
 	card: CardType

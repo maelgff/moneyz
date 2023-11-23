@@ -1,4 +1,4 @@
-import { CardType } from "../App";
+import { CardType } from 'src/components/Homepage'
 
 export const cards: CardType[] = [
   {
