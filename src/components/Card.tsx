@@ -1,9 +1,9 @@
 import React from 'react'
 import { Box, Card, CardHeader, Heading, Image } from '@chakra-ui/react'
-import { CardType } from 'src/components/Homepage'
+import { RecordModel } from 'pocketbase'
 
 interface Props {
-	card: CardType
+	card: RecordModel
 }
 
 export const CustomCard: React.FC<Props> = ({ card }) => {
@@ -18,13 +18,13 @@ export const CustomCard: React.FC<Props> = ({ card }) => {
 				alignItems='center'
 			>
 				<Image
-					src={card.image}
+					src={`${import.meta.env.VITE_PB_URL}/api/files/wishes/${card.id}/${card.image}`}
 					mixBlendMode='multiply'
 					borderRadius='10px'
 					cursor='pointer'
-					w={card.width}
-					h={card.height}
-					onClick={() => window.open(card.linkToProduct, '_blank')?.focus()}
+					w={card.image_width}
+					h={card.image_height}
+					onClick={() => window.open(card.product_link, '_blank')?.focus()}
 				/>
 			</Box>
 			<Box>
@@ -47,7 +47,7 @@ export const CustomCard: React.FC<Props> = ({ card }) => {
 					fontSize='14px'
 					fontFamily='circular'
 				>
-					{card.price}
+					{card.price} €
 				</Heading>
 			</Box>
 		</Card>

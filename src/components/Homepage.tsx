@@ -8,14 +8,13 @@ import {
 	Wrap,
 	WrapItem,
 	Heading,
-	Button,
 } from '@chakra-ui/react'
 import { CustomCard } from 'src/components/Card'
-import { cards } from 'src/constants/cardsList'
 import { ListResult, RecordModel } from 'pocketbase'
 import { useEffect, useState } from 'react'
 import pb from 'src/lib/pocketbase'
 import { useLogout } from 'src/hooks/useLogout'
+import { IoMdLogOut } from 'react-icons/io'
 
 export interface CardType {
 	brand: string
@@ -41,11 +40,11 @@ export const Homepage = () => {
 		setWishes(response)
 	}
 
-	console.log(wishes)
-
 	return (
 		<Box position={'relative'} maxWidth='1100px' p='0px 20px' margin='0px auto' pos='static'>
-			<Button onClick={() => logout()}>Logout</Button>
+			<IoMdLogOut size='25px' onClick={() => logout()}>
+				Logout
+			</IoMdLogOut>
 			<Wrap padding='10px'>
 				<WrapItem display='flex' alignItems='center'>
 					<Avatar
@@ -82,7 +81,7 @@ export const Homepage = () => {
 						Add wish
 					</Text>
 				</Card>
-				{cards.map((card: CardType) => {
+				{wishes?.items.map((card: RecordModel) => {
 					return <CustomCard key={`card-${card.brand}-${card.price}`} card={card} />
 				})}
 			</SimpleGrid>

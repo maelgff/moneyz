@@ -1,3 +1,4 @@
+import { ChakraProvider } from '@chakra-ui/react'
 import React from 'react'
 import ReactDOM from 'react-dom/client'
 import { QueryClient, QueryClientProvider } from 'react-query'
@@ -9,9 +10,11 @@ const elem = document.getElementById('root')
 if (elem) {
 	ReactDOM.createRoot(elem).render(
 		<React.StrictMode>
-			<QueryClientProvider client={queryClient}>
-				<App />
-			</QueryClientProvider>
+			<ChakraProvider>
+				<QueryClientProvider client={queryClient}>
+					<App />
+				</QueryClientProvider>
+			</ChakraProvider>
 		</React.StrictMode>,
 	)
 }
