@@ -8,7 +8,7 @@ interface Props {
 
 export const CustomCard: React.FC<Props> = ({ card }) => {
 	return (
-		<Card float='left' cursor='pointer' padding='10px'>
+		<Card float='left' cursor='pointer' padding='10px' shadow='none'>
 			<Box
 				borderRadius='10px'
 				bg='#efefef'
@@ -37,6 +37,7 @@ export const CustomCard: React.FC<Props> = ({ card }) => {
 					marginTop='10px'
 					marginLeft='5px'
 					fontWeight={500}
+					padding={0}
 				>
 					{card.brand}
 				</CardHeader>

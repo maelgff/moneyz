@@ -42,9 +42,11 @@ export const Homepage = () => {
 
 	return (
 		<Box position={'relative'} maxWidth='1100px' p='0px 20px' margin='0px auto' pos='static'>
-			<IoMdLogOut size='25px' onClick={() => logout()}>
-				Logout
-			</IoMdLogOut>
+			<Box pos='absolute' right={'20px'} top={'20px'} cursor='pointer'>
+				<IoMdLogOut size='25px' onClick={() => logout()} color='red'>
+					Logout
+				</IoMdLogOut>
+			</Box>
 			<Wrap padding='10px'>
 				<WrapItem display='flex' alignItems='center'>
 					<Avatar
@@ -58,7 +60,7 @@ export const Homepage = () => {
 						fontSize='30px'
 						fontFamily='circular'
 						fontWeight={'300'}
-						marginLeft={20}
+						marginLeft={'20px'}
 						color='#6b6b6b'
 					>
 						Mael's wishlist
@@ -66,7 +68,7 @@ export const Homepage = () => {
 				</WrapItem>
 			</Wrap>
 			<SimpleGrid columns={4} spacing={10}>
-				<Card float='left' cursor='pointer' padding='10px'>
+				<Card float='left' cursor='pointer' padding='10px' shadow='none'>
 					<Box borderRadius='10px' bg='#efefef' height='220px' display='flex'>
 						<Image
 							src='https://d18kyikiamq6s1.cloudfront.net/7b7a459f-02a0-4553-9262-c3f111e77a0e/images/plus.png'
