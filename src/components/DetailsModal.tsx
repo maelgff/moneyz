@@ -71,7 +71,7 @@ export const DetailsModal: React.FC<Props> = ({ card, onClose, isOpen, fetchWish
 							w={card?.image_width * 1.5}
 							h={card?.image_height * 1.5}
 						/>
-						<Flex flexDirection='column' padding='50px 30px'>
+						<Flex flexDirection='column' padding='50px 30px' w='100%'>
 							<Heading mb='5px' fontFamily='fantasy'>
 								{card?.brand}
 							</Heading>
