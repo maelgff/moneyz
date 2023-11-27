@@ -4,9 +4,11 @@ import { RecordModel } from 'pocketbase'
 
 interface Props {
 	card: RecordModel
+	setActiveCard: (card: RecordModel) => void
+	onOpen: () => void
 }
 
-export const CustomCard: React.FC<Props> = ({ card }) => {
+export const CustomCard: React.FC<Props> = ({ card, setActiveCard, onOpen }) => {
 	return (
 		<Card float='left' cursor='pointer' padding='10px' shadow='none'>
 			<Box
@@ -24,7 +26,10 @@ export const CustomCard: React.FC<Props> = ({ card }) => {
 					cursor='pointer'
 					w={card.image_width}
 					h={card.image_height}
-					onClick={() => window.open(card.product_link, '_blank')?.focus()}
+					onClick={() => {
+						onOpen()
+						setActiveCard(card)
+					}}
 				/>
 			</Box>
 			<Box>

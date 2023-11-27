@@ -8,6 +8,7 @@ import {
 	Wrap,
 	WrapItem,
 	Heading,
+	useDisclosure,
 } from '@chakra-ui/react'
 import { CustomCard } from 'src/components/Card'
 import { ListResult, RecordModel } from 'pocketbase'
@@ -15,20 +16,23 @@ import { useEffect, useState } from 'react'
 import pb from 'src/lib/pocketbase'
 import { useLogout } from 'src/hooks/useLogout'
 import { IoMdLogOut } from 'react-icons/io'
+import { DetailsModal } from './DetailsModal'
 
 export interface CardType {
 	brand: string
 	price: string
 	width: string
 	height: string
-	linkToProduct: string
+	link_product: string
 	image: string
 	position: string
 }
 
-export const Homepage = () => {
+export const Homepage: React.FC<{}> = () => {
 	const logout = useLogout()
 	const [wishes, setWishes] = useState<ListResult<RecordModel>>()
+	const [activeCard, setActiveCard] = useState<RecordModel>()
+	const { isOpen, onClose, onOpen } = useDisclosure()
 
 	useEffect(() => {
 		fetchWishes()
@@ -84,9 +88,17 @@ export const Homepage = () => {
 					</Text>
 				</Card>
 				{wishes?.items.map((card: RecordModel) => {
-					return <CustomCard key={`card-${card.brand}-${card.price}`} card={card} />
+					return (
+						<CustomCard
+							key={`card-${card.brand}-${card.price}`}
+							card={card}
+							setActiveCard={setActiveCard}
+							onOpen={onOpen}
+						/>
+					)
 				})}
 			</SimpleGrid>
+			<DetailsModal card={activeCard} isOpen={isOpen} onClose={onClose} fetchWishes={fetchWishes} />
 		</Box>
 	)
 }

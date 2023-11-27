@@ -37,8 +37,6 @@ export const App: React.FC<{}> = () => {
 
 	if (isLoggedIn) return <Homepage />
 
-	console.log(errors)
-
 	return (
 		<Flex
 			justifyContent='center'
