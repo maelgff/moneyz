@@ -10,10 +10,21 @@ interface Props {
 
 export const CustomCard: React.FC<Props> = ({ card, setActiveCard, onOpen }) => {
 	return (
-		<Card float='left' cursor='pointer' padding='10px' shadow='none'>
+		<Card
+			float='left'
+			cursor='pointer'
+			padding='10px'
+			shadow='none'
+			opacity={card?.is_purchased && 0.5}
+			_hover={{ background: '#efefef' }}
+			data-group
+		>
 			<Box
 				borderRadius='10px'
 				bg='#efefef'
+				_groupHover={{
+					background: 'linear-gradient(to bottom, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.2) 100%)',
+				}}
 				backgroundSize='cover'
 				width='fit-content'
 				display='flex'

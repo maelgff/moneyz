@@ -17,13 +17,14 @@ import pb from 'src/lib/pocketbase'
 import { useLogout } from 'src/hooks/useLogout'
 import { IoMdLogOut } from 'react-icons/io'
 import { DetailsModal } from './DetailsModal'
+import { ArchivedItems } from './ArchivedItems'
 
 export interface CardType {
 	brand: string
 	price: string
 	width: string
 	height: string
-	link_product: string
+	product_link: string
 	image: string
 	position: string
 }
@@ -87,17 +88,20 @@ export const Homepage: React.FC<{}> = () => {
 						Add wish
 					</Text>
 				</Card>
-				{wishes?.items.map((card: RecordModel) => {
-					return (
-						<CustomCard
-							key={`card-${card.brand}-${card.price}`}
-							card={card}
-							setActiveCard={setActiveCard}
-							onOpen={onOpen}
-						/>
-					)
-				})}
+				{wishes?.items
+					.filter((card: RecordModel) => !card.is_purchased)
+					.map((card: RecordModel) => {
+						return (
+							<CustomCard
+								key={`card-${card.brand}-${card.price}`}
+								card={card}
+								setActiveCard={setActiveCard}
+								onOpen={onOpen}
+							/>
+						)
+					})}
 			</SimpleGrid>
+			<ArchivedItems wishes={wishes?.items} onOpen={onOpen} setActiveCard={setActiveCard} />
 			<DetailsModal card={activeCard} isOpen={isOpen} onClose={onClose} fetchWishes={fetchWishes} />
 		</Box>
 	)
