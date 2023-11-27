@@ -19,6 +19,7 @@ import { IoMdLogOut } from 'react-icons/io'
 import { DetailsModal } from './DetailsModal'
 import { ArchivedItems } from './ArchivedItems'
 import { NewWishModal } from './NewWishModal'
+import { EditWishModal } from './EditWishModal'
 
 export interface CardType {
 	brand: string
@@ -26,7 +27,7 @@ export interface CardType {
 	image_width: string
 	image_height: string
 	product_link: string
-	image: File | null
+	image?: File | null
 }
 
 export const Homepage: React.FC<{}> = () => {
@@ -35,6 +36,7 @@ export const Homepage: React.FC<{}> = () => {
 	const [activeCard, setActiveCard] = useState<RecordModel>()
 	const { isOpen: isEditOpen, onOpen: onEditOpen, onClose: onEditClose } = useDisclosure()
 	const { isOpen: isNewOpen, onOpen: onNewOpen, onClose: onNewClose } = useDisclosure()
+	const { isOpen: isDetailsOpen, onOpen: onDetailsOpen, onClose: onDetailsClose } = useDisclosure()
 
 	useEffect(() => {
 		fetchWishes()
@@ -114,19 +116,31 @@ export const Homepage: React.FC<{}> = () => {
 								key={`card-${card.brand}-${card.price}`}
 								card={card}
 								setActiveCard={setActiveCard}
-								onOpen={onEditOpen}
+								onDetailsOpen={onDetailsOpen}
+								onEditOpen={onEditOpen}
 							/>
 						)
 					})}
 			</SimpleGrid>
-			<ArchivedItems wishes={wishes?.items} onOpen={onEditOpen} setActiveCard={setActiveCard} />
+			<ArchivedItems
+				wishes={wishes?.items}
+				onDetailsOpen={onDetailsOpen}
+				onEditOpen={onEditOpen}
+				setActiveCard={setActiveCard}
+			/>
 			<DetailsModal
 				card={activeCard}
+				isOpen={isDetailsOpen}
+				onClose={onDetailsClose}
+				fetchWishes={fetchWishes}
+			/>
+			<NewWishModal isOpen={isNewOpen} onClose={onNewClose} fetchWishes={fetchWishes} />
+			<EditWishModal
+				wish={activeCard}
 				isOpen={isEditOpen}
 				onClose={onEditClose}
 				fetchWishes={fetchWishes}
 			/>
-			<NewWishModal isOpen={isNewOpen} onClose={onNewClose} fetchWishes={fetchWishes} />
 		</Box>
 	)
 }

@@ -1,14 +1,16 @@
 import React from 'react'
-import { Box, Card, CardHeader, Heading, Image } from '@chakra-ui/react'
+import { Box, Card, CardHeader, Heading, IconButton, Image } from '@chakra-ui/react'
+import { MdModeEdit } from 'react-icons/md'
 import { RecordModel } from 'pocketbase'
 
 interface Props {
 	card: RecordModel
 	setActiveCard: (card: RecordModel) => void
-	onOpen: () => void
+	onEditOpen: () => void
+	onDetailsOpen: () => void
 }
 
-export const CustomCard: React.FC<Props> = ({ card, setActiveCard, onOpen }) => {
+export const CustomCard: React.FC<Props> = ({ card, setActiveCard, onEditOpen, onDetailsOpen }) => {
 	return (
 		<Card
 			float='left'
@@ -30,6 +32,21 @@ export const CustomCard: React.FC<Props> = ({ card, setActiveCard, onOpen }) => 
 				display='flex'
 				alignItems='center'
 			>
+				<IconButton
+					bg='#fff'
+					top='20px'
+					right='20px'
+					position='absolute'
+					zIndex={10}
+					icon={<MdModeEdit />}
+					aria-label=''
+					opacity={0}
+					_groupHover={{ opacity: 0.9 }}
+					onClick={() => {
+						setActiveCard(card)
+						onEditOpen()
+					}}
+				/>
 				<Image
 					src={`${import.meta.env.VITE_PB_URL}/api/files/wishes/${card.id}/${card.image}`}
 					mixBlendMode='multiply'
@@ -38,7 +55,7 @@ export const CustomCard: React.FC<Props> = ({ card, setActiveCard, onOpen }) => 
 					w={card.image_width}
 					h={card.image_height}
 					onClick={() => {
-						onOpen()
+						onDetailsOpen()
 						setActiveCard(card)
 					}}
 				/>

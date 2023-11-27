@@ -5,10 +5,16 @@ import { CustomCard } from './Card'
 interface Props {
 	wishes: RecordModel[] | undefined
 	setActiveCard: (card: RecordModel) => void
-	onOpen: () => void
+	onEditOpen: () => void
+	onDetailsOpen: () => void
 }
 
-export const ArchivedItems: React.FC<Props> = ({ wishes, setActiveCard, onOpen }) => {
+export const ArchivedItems: React.FC<Props> = ({
+	wishes,
+	setActiveCard,
+	onEditOpen,
+	onDetailsOpen,
+}) => {
 	return (
 		<>
 			<Heading as='h4' size='md' mb='10px' mt='20px'>
@@ -23,7 +29,8 @@ export const ArchivedItems: React.FC<Props> = ({ wishes, setActiveCard, onOpen }
 								key={`card-${card.brand}-${card.price}`}
 								card={card}
 								setActiveCard={setActiveCard}
-								onOpen={onOpen}
+								onEditOpen={onEditOpen}
+								onDetailsOpen={onDetailsOpen}
 							/>
 						)
 					})}
