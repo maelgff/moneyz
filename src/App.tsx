@@ -12,7 +12,8 @@ import {
 import { useForm } from 'react-hook-form'
 import pb from './lib/pocketbase'
 import { useLogin } from 'src/hooks/useLogin'
-import { Homepage } from './components/Homepage'
+import { Wishlist } from './components/wishlist/Wishlist'
+import { Homepage } from './components/homepage/Homepage'
 
 type FormValues = {
 	email: string

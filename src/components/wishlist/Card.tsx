@@ -16,6 +16,7 @@ export const CustomCard: React.FC<Props> = ({ card, setActiveCard, onEditOpen, o
 			float='left'
 			cursor='pointer'
 			padding='10px'
+			maxW='265px'
 			shadow='none'
 			opacity={card?.is_purchased && 0.5}
 			_hover={{ background: '#efefef' }}

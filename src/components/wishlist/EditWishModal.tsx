@@ -16,7 +16,7 @@ import {
 import pb from 'src/lib/pocketbase'
 import { useToast } from '@chakra-ui/react'
 import { useState } from 'react'
-import { CardType } from './Homepage'
+import { CardType } from './Wishlist'
 import { RecordModel } from 'pocketbase'
 
 interface Props {

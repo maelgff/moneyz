@@ -3,8 +3,21 @@ import React from 'react'
 import ReactDOM from 'react-dom/client'
 import { QueryClient, QueryClientProvider } from 'react-query'
 import { App } from 'src/App'
+import { createBrowserRouter, RouterProvider } from 'react-router-dom'
+import { Wishlist } from './components/wishlist/Wishlist'
 
 const queryClient = new QueryClient()
+
+const router = createBrowserRouter([
+	{
+		path: '/',
+		element: <App />,
+	},
+	{
+		path: '/wishlist',
+		element: <Wishlist />,
+	},
+])
 
 const elem = document.getElementById('root')
 if (elem) {
@@ -12,7 +25,7 @@ if (elem) {
 		<React.StrictMode>
 			<ChakraProvider>
 				<QueryClientProvider client={queryClient}>
-					<App />
+					<RouterProvider router={router} />
 				</QueryClientProvider>
 			</ChakraProvider>
 		</React.StrictMode>,
