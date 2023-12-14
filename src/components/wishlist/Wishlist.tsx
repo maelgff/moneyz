@@ -64,8 +64,9 @@ export const Wishlist: React.FC<{}> = () => {
 							h='100px'
 							w='100px'
 							borderRadius='50px'
-							name='Mael Geoffroy'
-							src='https://media.licdn.com/dms/image/C4E03AQGeCUI2mns8eg/profile-displayphoto-shrink_800_800/0/1610457590736?e=2147483647&v=beta&t=5F6zrL3r5KuFmftpE10sUWFXPRbJHGPQ43I774mrE18'
+							name={pb.authStore?.model?.username}
+							src={`${import.meta.env.VITE_PB_URL}/api/files/users/${pb.authStore?.model?.id}/${pb
+								.authStore?.model?.avatar}`}
 						/>
 						<Heading
 							fontSize='30px'
@@ -74,7 +75,7 @@ export const Wishlist: React.FC<{}> = () => {
 							marginLeft={'20px'}
 							color='#6b6b6b'
 						>
-							Mael's wishlist
+							{pb.authStore?.model?.username}'s wishlist
 						</Heading>
 					</WrapItem>
 				</Wrap>

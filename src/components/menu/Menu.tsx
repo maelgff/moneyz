@@ -6,6 +6,7 @@ import { SlSettings } from 'react-icons/sl'
 import { IoMdLogOut } from 'react-icons/io'
 import { useLogout } from 'src/hooks/useLogout'
 import { Link } from 'react-router-dom'
+import pb from 'src/lib/pocketbase'
 
 export const Menu: React.FC<{}> = () => {
 	const logout = useLogout()
@@ -32,7 +33,8 @@ export const Menu: React.FC<{}> = () => {
 						w='100px'
 						borderRadius='50px'
 						name='Mael Geoffroy'
-						src='https://media.licdn.com/dms/image/C4E03AQGeCUI2mns8eg/profile-displayphoto-shrink_800_800/0/1610457590736?e=2147483647&v=beta&t=5F6zrL3r5KuFmftpE10sUWFXPRbJHGPQ43I774mrE18'
+						src={`${import.meta.env.VITE_PB_URL}/api/files/users/${pb.authStore?.model?.id}/${pb
+							.authStore?.model?.avatar}`}
 					/>
 				</Flex>
 				<Flex mb='15px' flexDir='column' textAlign='center'>
@@ -40,7 +42,7 @@ export const Menu: React.FC<{}> = () => {
 						Welcome back,
 					</Text>
 					<Text fontSize='20px' color='#fff' fontFamily='circular'>
-						Mael Geoffroy
+						{pb.authStore?.model?.username}
 					</Text>
 				</Flex>
 				<Flex mt='40px' flexDir='column'>

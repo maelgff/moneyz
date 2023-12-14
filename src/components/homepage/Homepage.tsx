@@ -1,7 +1,41 @@
-import { Box, Flex, Grid, GridItem, Heading, Text } from '@chakra-ui/react'
+import { Avatar, Box, Flex, Grid, GridItem, Heading, Text } from '@chakra-ui/react'
 import { Menu } from 'src/components/menu/Menu'
+import { Doughnut } from 'react-chartjs-2'
+import 'chart.js/auto'
+import { useState } from 'react'
+import { ChartData, ScriptableContext } from 'chart.js/auto'
 
 export const Homepage: React.FC<{}> = () => {
+	const [chartData] = useState<ChartData<'doughnut', number[], string>>({
+		labels: ['BNP', 'Bourso', 'Nalo'],
+		datasets: [
+			{
+				label: 'Users Gained ',
+				data: [1086, 6623, 6105],
+				backgroundColor: (context: ScriptableContext<'doughnut'>) => {
+					const ctx = context.chart.ctx
+					const gradient = ctx.createLinearGradient(0, 0, 0, 200)
+					gradient.addColorStop(0, '#c8d0be')
+					gradient.addColorStop(1, '#a8eb12')
+					if (context.dataIndex === 0) return gradient
+					const gradient2 = ctx.createLinearGradient(0, 0, 0, 200)
+					gradient2.addColorStop(0, '#ff96cf')
+					gradient2.addColorStop(0.25, '#ff919e')
+					gradient2.addColorStop(0.5, '#ffa45e')
+					gradient2.addColorStop(0.75, '#fec812')
+					if (context.dataIndex === 1) return gradient2
+					const gradient3 = ctx.createLinearGradient(0, 0, 0, 200)
+					gradient3.addColorStop(0, '#051937')
+					gradient3.addColorStop(0.5, '#004d7a')
+					gradient3.addColorStop(1, '#008793')
+					return gradient3
+				},
+				borderColor: 'black',
+				borderWidth: 0,
+			},
+		],
+	})
+
 	return (
 		<Flex>
 			<Menu />
@@ -21,7 +55,12 @@ export const Homepage: React.FC<{}> = () => {
 						Payment updates
 					</Text>
 					<Flex gap={5}>
-						<Box p='15px' bg='#c8d0be' borderRadius='20px' minH='120px'>
+						<Box
+							p='15px'
+							bg='linear-gradient(to right top, #c8d0be, #c0d89f, #b8df7d, #b0e556, #a8eb12)'
+							borderRadius='20px'
+							minH='120px'
+						>
 							<Flex pos='relative'>
 								<Text bg='#b8c3a9' p='0px 5px' color='#73875a' borderRadius='6px' fontWeight='bold'>
 									€
@@ -47,7 +86,12 @@ export const Homepage: React.FC<{}> = () => {
 								</Text>
 							</Flex>
 						</Box>
-						<Box p='15px' bg='#ff96cf9c' borderRadius='20px' minH='120px'>
+						<Box
+							p='15px'
+							bg='linear-gradient(to right top, #ff96cf, #ff919e, #ffa45e, #fec812, #a8eb12)'
+							borderRadius='20px'
+							minH='120px'
+						>
 							<Flex pos='relative'>
 								<Text bg='#fa83c4' p='0px 5px' color='#e8489f' borderRadius='6px' fontWeight='bold'>
 									€
@@ -73,9 +117,14 @@ export const Homepage: React.FC<{}> = () => {
 								</Text>
 							</Flex>
 						</Box>
-						<Box p='15px' bg='#696fc19c' borderRadius='20px' minH='120px'>
+						<Box
+							p='15px'
+							bg='linear-gradient(to right top, #051937, #004d7a, #008793, #00bf72, #a8eb12)'
+							borderRadius='20px'
+							minH='120px'
+						>
 							<Flex pos='relative'>
-								<Text bg='#5b63d3' p='0px 5px' color='#414ac7' borderRadius='6px' fontWeight='bold'>
+								<Text bg='#5863ff' p='0px 5px' color='#414ac7' borderRadius='6px' fontWeight='bold'>
 									€
 								</Text>
 								<Text ml='8px' fontFamily='circular' fontWeight='600'>
@@ -101,8 +150,64 @@ export const Homepage: React.FC<{}> = () => {
 						</Box>
 					</Flex>
 				</GridItem>
-				<GridItem colSpan={2} bg='#fff' />
-				<GridItem colSpan={2} bg='#f1eee5' />
+				<GridItem colSpan={2} bg='#fff' p='25px'>
+					<Heading size='sm'>Distribution</Heading>
+					<Flex p='30px'>
+						<Doughnut
+							data={chartData}
+							options={{
+								responsive: true,
+								cutout: 90,
+								plugins: {
+									title: {
+										display: false,
+									},
+									tooltip: {
+										callbacks: {
+											label: (context) => `Amount available : ${context.parsed} €`,
+										},
+									},
+									legend: {
+										position: 'bottom',
+									},
+								},
+							}}
+						/>
+					</Flex>
+				</GridItem>
+				<GridItem colSpan={2} bg='#f1eee5' p='25px'>
+					<Heading size='sm'>Recent movements</Heading>
+					<Box background='#fff' borderRadius='25px' padding='15px' mt='15px'>
+						<Flex flexDir='row'>
+							<Avatar
+								h='50px'
+								w='50px'
+								borderRadius='50px'
+								src={`https://www.jacquemus.com/dw/image/v2/BJFJ_PRD/on/demandware.static/-/Sites-master-jacquemus/default/dwaddbf626/23H213AC002-5001-990_13.jpg?q=100`}
+							/>
+							<Flex flexDir='column' ml='20px' minW='60%'>
+								<Text fontFamily='circular' fontWeight='600'>
+									Bob Jacquemus
+								</Text>
+								<Text fontWeight='200' color='c0c0c0'>
+									05/12/2023
+								</Text>
+							</Flex>
+							<Text
+								display='flex'
+								alignItems='center'
+								textAlign='right'
+								fontWeight='500'
+								justifyContent='flex-end'
+								fontSize='20px'
+								fontFamily='circular'
+								width='max-content'
+							>
+								- 110 €
+							</Text>
+						</Flex>
+					</Box>
+				</GridItem>
 			</Grid>
 		</Flex>
 	)
