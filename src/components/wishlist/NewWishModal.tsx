@@ -15,7 +15,7 @@ import {
 import pb from 'src/lib/pocketbase'
 import { useToast } from '@chakra-ui/react'
 import { useState } from 'react'
-import { CardType } from './Wishlist'
+import { Wish } from './Wishlist'
 
 interface Props {
 	isOpen: boolean
@@ -24,11 +24,11 @@ interface Props {
 }
 
 export const NewWishModal: React.FC<Props> = ({ onClose, isOpen, fetchWishes }) => {
-	const [newWish, setNewWish] = useState<CardType>({
+	const [newWish, setNewWish] = useState<Wish>({
 		price: '',
 		brand: '',
-		image_width: '',
-		image_height: '',
+		image_width: 0,
+		image_height: 0,
 		product_link: '',
 		image: null,
 	})
@@ -90,14 +90,18 @@ export const NewWishModal: React.FC<Props> = ({ onClose, isOpen, fetchWishes }) 
 								<FormLabel>Image width</FormLabel>
 								<Input
 									type='number'
-									onChange={(e) => setNewWish({ ...newWish, image_width: e.target.value })}
+									onChange={(e) =>
+										setNewWish({ ...newWish, image_width: parseInt(e.target.value) })
+									}
 								/>
 							</FormControl>
 							<FormControl>
 								<FormLabel>Image height</FormLabel>
 								<Input
 									type='number'
-									onChange={(e) => setNewWish({ ...newWish, image_height: e.target.value })}
+									onChange={(e) =>
+										setNewWish({ ...newWish, image_height: parseInt(e.target.value) })
+									}
 								/>
 							</FormControl>
 							<Button

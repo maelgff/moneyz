@@ -5,6 +5,7 @@ import { QueryClient, QueryClientProvider } from 'react-query'
 import { App } from 'src/App'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import { Wishlist } from './components/wishlist/Wishlist'
+import { Settings } from './components/settings/Settings'
 
 const queryClient = new QueryClient()
 
@@ -16,6 +17,10 @@ const router = createBrowserRouter([
 	{
 		path: '/wishlist',
 		element: <Wishlist />,
+	},
+	{
+		path: '/settings',
+		element: <Settings />,
 	},
 ])
 

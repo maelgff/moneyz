@@ -1,10 +1,10 @@
 import { Heading, SimpleGrid } from '@chakra-ui/react'
-import { RecordModel } from 'pocketbase'
 import { CustomCard } from './Card'
+import { Wish } from './Wishlist'
 
 interface Props {
-	wishes: RecordModel[] | undefined
-	setActiveCard: (card: RecordModel) => void
+	wishes: Wish[] | undefined
+	setActiveCard: (card: Wish) => void
 	onEditOpen: () => void
 	onDetailsOpen: () => void
 }
@@ -22,8 +22,8 @@ export const ArchivedItems: React.FC<Props> = ({
 			</Heading>
 			<SimpleGrid columns={4} spacing={10}>
 				{wishes
-					?.filter((card: RecordModel) => card.is_purchased)
-					.map((card: RecordModel) => {
+					?.filter((card: Wish) => card.is_purchased)
+					.map((card: Wish) => {
 						return (
 							<CustomCard
 								key={`card-${card.brand}-${card.price}`}

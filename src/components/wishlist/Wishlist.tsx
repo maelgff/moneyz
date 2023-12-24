@@ -12,7 +12,7 @@ import {
 	useDisclosure,
 } from '@chakra-ui/react'
 import { CustomCard } from 'src/components/wishlist/Card'
-import { ListResult, RecordModel } from 'pocketbase'
+import { ListResult } from 'pocketbase'
 import { useEffect, useState } from 'react'
 import pb from 'src/lib/pocketbase'
 import { DetailsModal } from './DetailsModal'
@@ -21,18 +21,21 @@ import { NewWishModal } from './NewWishModal'
 import { EditWishModal } from './EditWishModal'
 import { Menu } from '../menu/Menu'
 
-export interface CardType {
-	brand: string
-	price: string
-	image_width: string
-	image_height: string
-	product_link: string
+export type Wish = {
+	id?: string
+	brand?: string
+	price?: string
+	image_width?: number
+	image_height?: number
+	product_link?: string
 	image?: File | null
+	is_purchased?: boolean
+	updated?: string
 }
 
 export const Wishlist: React.FC<{}> = () => {
-	const [wishes, setWishes] = useState<ListResult<RecordModel>>()
-	const [activeCard, setActiveCard] = useState<RecordModel>()
+	const [wishes, setWishes] = useState<ListResult<Wish>>()
+	const [activeCard, setActiveCard] = useState<Wish>()
 	const { isOpen: isEditOpen, onOpen: onEditOpen, onClose: onEditClose } = useDisclosure()
 	const { isOpen: isNewOpen, onOpen: onNewOpen, onClose: onNewClose } = useDisclosure()
 	const { isOpen: isDetailsOpen, onOpen: onDetailsOpen, onClose: onDetailsClose } = useDisclosure()
@@ -42,8 +45,7 @@ export const Wishlist: React.FC<{}> = () => {
 	}, [])
 
 	const fetchWishes = async () => {
-		let response = await pb.collection('wishes').getList(1, 50)
-		response = await response
+		let response = await pb.collection('wishes').getList<Wish>(1, 50)
 		setWishes(response)
 	}
 
@@ -57,6 +59,7 @@ export const Wishlist: React.FC<{}> = () => {
 				pos='static'
 				maxH='100vh'
 				overflow={'scroll'}
+				bg='#fff'
 			>
 				<Wrap padding='10px'>
 					<WrapItem display='flex' alignItems='center'>
@@ -86,6 +89,7 @@ export const Wishlist: React.FC<{}> = () => {
 						cursor='pointer'
 						padding='10px'
 						shadow='none'
+						bg='#fff'
 						_hover={{ background: '#efefef' }}
 						onClick={onNewOpen}
 						data-group
@@ -109,13 +113,13 @@ export const Wishlist: React.FC<{}> = () => {
 								h='46px'
 							/>
 						</Box>
-						<Text opacity={0.4} fontSize={18} fontFamily='circular'>
+						<Text opacity={0.4} fontSize={18} fontFamily='circular' color='#1A202C'>
 							Add wish
 						</Text>
 					</Card>
 					{wishes?.items
-						.filter((card: RecordModel) => !card.is_purchased)
-						.map((card: RecordModel) => {
+						.filter((card: Wish) => !card.is_purchased)
+						.map((card: Wish) => {
 							return (
 								<CustomCard
 									key={`card-${card.brand}-${card.price}`}

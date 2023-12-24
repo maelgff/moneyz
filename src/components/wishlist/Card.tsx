@@ -1,11 +1,11 @@
 import React from 'react'
 import { Box, Card, CardHeader, Heading, IconButton, Image } from '@chakra-ui/react'
 import { MdModeEdit } from 'react-icons/md'
-import { RecordModel } from 'pocketbase'
+import { Wish } from './Wishlist'
 
 interface Props {
-	card: RecordModel
-	setActiveCard: (card: RecordModel) => void
+	card: Wish
+	setActiveCard: (card: Wish) => void
 	onEditOpen: () => void
 	onDetailsOpen: () => void
 }
@@ -18,7 +18,8 @@ export const CustomCard: React.FC<Props> = ({ card, setActiveCard, onEditOpen, o
 			padding='10px'
 			maxW='265px'
 			shadow='none'
-			opacity={card?.is_purchased && 0.5}
+			bg='#fff'
+			opacity={card?.is_purchased ? 0.5 : 1}
 			_hover={{ background: '#efefef' }}
 			data-group
 		>
@@ -35,6 +36,7 @@ export const CustomCard: React.FC<Props> = ({ card, setActiveCard, onEditOpen, o
 			>
 				<IconButton
 					bg='#fff'
+					color='#000'
 					top='20px'
 					right='20px'
 					position='absolute'
@@ -79,6 +81,7 @@ export const CustomCard: React.FC<Props> = ({ card, setActiveCard, onEditOpen, o
 					opacity={0.5}
 					marginLeft='5px'
 					marginTop='-2px'
+					color='#000'
 					fontSize='14px'
 					fontFamily='circular'
 				>

@@ -16,19 +16,18 @@ import {
 import pb from 'src/lib/pocketbase'
 import { useToast } from '@chakra-ui/react'
 import { useState } from 'react'
-import { CardType } from './Wishlist'
-import { RecordModel } from 'pocketbase'
+import { Wish } from './Wishlist'
 
 interface Props {
-	wish: RecordModel | undefined
+	wish: Wish | undefined
 	isOpen: boolean
 	onClose: () => void
 	fetchWishes: () => void
 }
 
 export const EditWishModal: React.FC<Props> = ({ wish, onClose, isOpen, fetchWishes }) => {
-	const [imageUploaded, setImageUploaded] = useState<any>(null)
-	const [wishUpdated, setWishUpdated] = useState<CardType>({
+	const [imageUploaded, setImageUploaded] = useState<string | null>(null)
+	const [wishUpdated, setWishUpdated] = useState<Wish>({
 		price: wish?.price,
 		brand: wish?.brand,
 		image_width: wish?.image_width,
@@ -38,7 +37,7 @@ export const EditWishModal: React.FC<Props> = ({ wish, onClose, isOpen, fetchWis
 	const toast = useToast()
 
 	const updateWish = async () => {
-		if (!wish) return
+		if (!wish || !wish.id) return
 		await pb.collection('wishes').update(wish?.id, wishUpdated)
 		await fetchWishes()
 		onClose()
@@ -61,7 +60,7 @@ export const EditWishModal: React.FC<Props> = ({ wish, onClose, isOpen, fetchWis
 		if (file) {
 			const reader = new FileReader()
 			reader.onloadend = () => {
-				setImageUploaded(reader.result)
+				setImageUploaded(reader.result as string)
 			}
 			reader.readAsDataURL(file)
 		}
@@ -140,7 +139,7 @@ export const EditWishModal: React.FC<Props> = ({ wish, onClose, isOpen, fetchWis
 											type='number'
 											defaultValue={wish?.image_width}
 											onChange={(e) =>
-												setWishUpdated({ ...wishUpdated, image_width: e.target.value })
+												setWishUpdated({ ...wishUpdated, image_width: parseInt(e.target.value) })
 											}
 										/>
 									</FormControl>
@@ -150,7 +149,7 @@ export const EditWishModal: React.FC<Props> = ({ wish, onClose, isOpen, fetchWis
 											type='number'
 											defaultValue={wish?.image_height}
 											onChange={(e) =>
-												setWishUpdated({ ...wishUpdated, image_height: e.target.value })
+												setWishUpdated({ ...wishUpdated, image_height: parseInt(e.target.value) })
 											}
 										/>
 									</FormControl>

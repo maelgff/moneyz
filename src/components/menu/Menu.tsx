@@ -80,12 +80,23 @@ export const Menu: React.FC<{}> = () => {
 							</Text>
 						</Flex>
 					</Link>
-					<Flex alignItems='center' padding='20px'>
-						<SlSettings color='#fff' size='22px' />
-						<Text fontSize='18px' color='#fff' fontFamily='circular' ml='15px' fontWeight='600'>
-							Settings
-						</Text>
-					</Flex>
+					<Link to='/settings'>
+						<Flex alignItems='center' padding='20px'>
+							<SlSettings
+								size='22px'
+								color={window.location.pathname === '/settings' ? '#7b80e9' : '#fff'}
+							/>
+							<Text
+								fontSize='18px'
+								color={window.location.pathname === '/settings' ? '#84795b' : '#fff'}
+								fontFamily='circular'
+								ml='15px'
+								fontWeight='600'
+							>
+								Settings
+							</Text>
+						</Flex>
+					</Link>
 					<Flex
 						alignItems='center'
 						padding='20px'

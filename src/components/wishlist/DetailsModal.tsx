@@ -11,13 +11,13 @@ import {
 	Flex,
 	Text,
 } from '@chakra-ui/react'
-import { RecordModel } from 'pocketbase'
 import { FaRegCircle, FaRegCheckCircle } from 'react-icons/fa'
 import pb from 'src/lib/pocketbase'
 import { useToast } from '@chakra-ui/react'
+import { Wish } from './Wishlist'
 
 interface Props {
-	card: RecordModel | undefined
+	card: Wish | undefined
 	isOpen: boolean
 	onClose: () => void
 	fetchWishes: () => void
@@ -68,8 +68,8 @@ export const DetailsModal: React.FC<Props> = ({ card, onClose, isOpen, fetchWish
 							mixBlendMode='multiply'
 							borderLeftRadius='6px'
 							cursor='pointer'
-							w={card?.image_width * 1.5}
-							h={card?.image_height * 1.5}
+							w={card?.image_width ? card?.image_width * 1.5 : 45}
+							h={card?.image_height ? card?.image_height * 1.5 : 45}
 						/>
 						<Flex flexDirection='column' padding='50px 30px' w='100%'>
 							<Heading mb='5px' fontFamily='fantasy'>
@@ -86,7 +86,7 @@ export const DetailsModal: React.FC<Props> = ({ card, onClose, isOpen, fetchWish
 									cursor='pointer'
 									onClick={() => window.open(card?.product_link, '_blank')}
 								>
-									{card?.product_link.slice(0, 25)}
+									{card?.product_link?.slice(0, 25)}
 								</Text>
 							</Flex>
 							<Button

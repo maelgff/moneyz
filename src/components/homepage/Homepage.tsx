@@ -2,10 +2,15 @@ import { Avatar, Box, Flex, Grid, GridItem, Heading, Text } from '@chakra-ui/rea
 import { Menu } from 'src/components/menu/Menu'
 import { Doughnut } from 'react-chartjs-2'
 import 'chart.js/auto'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { ChartData, ScriptableContext } from 'chart.js/auto'
+import pb from 'src/lib/pocketbase'
+import { ListResult } from 'pocketbase'
+import { ItemBought } from './ItemBought'
+import { Wish } from '../wishlist/Wishlist'
 
 export const Homepage: React.FC<{}> = () => {
+	const [itemsBought, setItemsBought] = useState<ListResult<Wish>>()
 	const [chartData] = useState<ChartData<'doughnut', number[], string>>({
 		labels: ['BNP', 'Bourso', 'Nalo'],
 		datasets: [
@@ -36,6 +41,15 @@ export const Homepage: React.FC<{}> = () => {
 		],
 	})
 
+	useEffect(() => {
+		fetchItemsBought()
+	}, [])
+
+	const fetchItemsBought = async () => {
+		let response = await pb.collection('wishes').getList(1, 50, { filter: 'is_purchased = true' })
+		setItemsBought(response)
+	}
+
 	return (
 		<Flex>
 			<Menu />
@@ -48,7 +62,7 @@ export const Homepage: React.FC<{}> = () => {
 				minH='100vh'
 			>
 				<GridItem rowSpan={2} colSpan={4} bg='#f8f7f2' p='30px'>
-					<Heading as='h3' size='sm'>
+					<Heading as='h3' size='sm' color='#000'>
 						Dashboard
 					</Heading>
 					<Text color='#afb4b2' mb='30px'>
@@ -150,7 +164,7 @@ export const Homepage: React.FC<{}> = () => {
 						</Box>
 					</Flex>
 				</GridItem>
-				<GridItem colSpan={2} bg='#fff' p='25px'>
+				<GridItem colSpan={2} bg='#fff' p='35px'>
 					<Heading size='sm'>Distribution</Heading>
 					<Flex p='30px'>
 						<Doughnut
@@ -176,7 +190,9 @@ export const Homepage: React.FC<{}> = () => {
 					</Flex>
 				</GridItem>
 				<GridItem colSpan={2} bg='#f1eee5' p='25px'>
-					<Heading size='sm'>Recent movements</Heading>
+					<Heading size='sm' color='#000'>
+						Recent movements
+					</Heading>
 					<Box background='#fff' borderRadius='25px' padding='15px' mt='15px'>
 						<Flex flexDir='row'>
 							<Avatar
@@ -186,10 +202,10 @@ export const Homepage: React.FC<{}> = () => {
 								src={`https://www.jacquemus.com/dw/image/v2/BJFJ_PRD/on/demandware.static/-/Sites-master-jacquemus/default/dwaddbf626/23H213AC002-5001-990_13.jpg?q=100`}
 							/>
 							<Flex flexDir='column' ml='20px' minW='60%'>
-								<Text fontFamily='circular' fontWeight='600'>
+								<Text fontFamily='circular' fontWeight='600' color='#000'>
 									Bob Jacquemus
 								</Text>
-								<Text fontWeight='200' color='c0c0c0'>
+								<Text fontWeight='300' color='#c0c0c0'>
 									05/12/2023
 								</Text>
 							</Flex>
@@ -202,11 +218,15 @@ export const Homepage: React.FC<{}> = () => {
 								fontSize='20px'
 								fontFamily='circular'
 								width='max-content'
+								color='#000'
 							>
 								- 110 €
 							</Text>
 						</Flex>
 					</Box>
+					{itemsBought?.items.map((card: Wish) => {
+						return <ItemBought item={card} />
+					})}
 				</GridItem>
 			</Grid>
 		</Flex>
