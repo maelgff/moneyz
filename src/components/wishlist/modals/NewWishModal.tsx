@@ -15,7 +15,7 @@ import {
 import pb from 'src/lib/pocketbase'
 import { useToast } from '@chakra-ui/react'
 import { useState } from 'react'
-import { Wish } from './Wishlist'
+import { Wish } from '../Wishlist'
 
 interface Props {
 	isOpen: boolean
@@ -53,7 +53,13 @@ export const NewWishModal: React.FC<Props> = ({ onClose, isOpen, fetchWishes }) 
 			<ModalContent maxW='700px'>
 				<ModalCloseButton />
 				<ModalBody p='25px'>
-					<Box bg='#fff' borderRadius='6px' display='flex' alignItems='center' flexDir='column'>
+					<Box
+						bg='transparent'
+						borderRadius='6px'
+						display='flex'
+						alignItems='center'
+						flexDir='column'
+					>
 						<Heading fontFamily='fantasy'>Add wish</Heading>
 						<Flex flexDir='column'>
 							<FormControl>

@@ -20,7 +20,7 @@ export const ArchivedItems: React.FC<Props> = ({
 			<Heading as='h4' size='md' mb='10px' mt='20px'>
 				Archives
 			</Heading>
-			<SimpleGrid columns={4} spacing={10}>
+			<SimpleGrid columns={4} spacing={10} marginBottom='15px'>
 				{wishes
 					?.filter((card: Wish) => card.is_purchased)
 					.map((card: Wish) => {

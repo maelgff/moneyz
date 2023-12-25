@@ -15,10 +15,10 @@ import { CustomCard } from 'src/components/wishlist/Card'
 import { ListResult } from 'pocketbase'
 import { useEffect, useState } from 'react'
 import pb from 'src/lib/pocketbase'
-import { DetailsModal } from './DetailsModal'
+import { DetailsModal } from './modals/DetailsModal'
 import { ArchivedItems } from './ArchivedItems'
-import { NewWishModal } from './NewWishModal'
-import { EditWishModal } from './EditWishModal'
+import { NewWishModal } from './modals/NewWishModal'
+import { EditWishModal } from './modals/EditWishModal'
 import { Menu } from '../menu/Menu'
 
 export type Wish = {

@@ -8,11 +8,13 @@ import {
 	Heading,
 	Input,
 	Text,
+	useColorMode,
 } from '@chakra-ui/react'
 import { useForm } from 'react-hook-form'
 import pb from './lib/pocketbase'
 import { useLogin } from 'src/hooks/useLogin'
 import { Homepage } from './components/homepage/Homepage'
+import ColorModeToggle from './components/settings/ColorModeToggle'
 
 type FormValues = {
 	email: string
@@ -21,6 +23,7 @@ type FormValues = {
 
 export const App: React.FC<{}> = () => {
 	const isLoggedIn = pb.authStore.isValid
+	const { colorMode } = useColorMode()
 	const { mutate: login, isLoading, isError } = useLogin()
 
 	const {
@@ -36,7 +39,6 @@ export const App: React.FC<{}> = () => {
 	}
 
 	if (isLoggedIn) return <Homepage />
-
 	return (
 		<Flex
 			justifyContent='center'
@@ -44,25 +46,48 @@ export const App: React.FC<{}> = () => {
 			align='center'
 			minH='100vh'
 			w='full'
-			bg='linear-gradient(249.91deg, rgb(255, 248, 244) 0%, rgb(222, 241, 255) 48.96%, rgb(255, 248, 244) 100%)'
+			bg={
+				colorMode === 'light'
+					? 'linear-gradient(249.91deg, rgb(255, 248, 244) 0%, rgb(222, 241, 255) 48.96%, rgb(255, 248, 244) 100%)'
+					: 'inherit'
+			}
 		>
 			<Heading as='h1' fontSize='5xl' mb={6} fontFamily='circular'>
-				Wishlist
+				Moneyz
 			</Heading>
+			<ColorModeToggle position='absolute' right='20px' top='20px' />
 			<Container maxW='md' w='full' bg='#fff' p={20} borderRadius='base'>
-				<Heading as='h2' textAlign='center' fontSize='22px' mb={10} fontFamily='circular'>
+				<Heading
+					as='h2'
+					color='#000'
+					textAlign='center'
+					fontSize='22px'
+					mb={10}
+					fontFamily='circular'
+				>
 					Login
 				</Heading>
 				<form onSubmit={handleSubmit(onSubmit)}>
 					<FormControl isInvalid={errors.email ? true : false} mt={2}>
-						<FormLabel fontFamily='circular'>Email</FormLabel>
-						<Input type='text' placeholder='Email' {...register('email', { required: true })} />
+						<FormLabel color='#000' fontFamily='circular'>
+							Email
+						</FormLabel>
+						<Input
+							type='text'
+							borderColor='#e2e8f0'
+							color='#000'
+							placeholder='Email'
+							{...register('email', { required: true })}
+						/>
 					</FormControl>
-
 					<FormControl isInvalid={errors.password ? true : false} mt={2}>
-						<FormLabel fontFamily='circular'>Password</FormLabel>
+						<FormLabel color='#000' fontFamily='circular'>
+							Password
+						</FormLabel>
 						<Input
 							type='password'
+							borderColor='#e2e8f0'
+							color='#000'
 							placeholder='Password'
 							{...register('password', { required: true })}
 						/>

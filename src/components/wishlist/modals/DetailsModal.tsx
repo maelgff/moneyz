@@ -14,7 +14,7 @@ import {
 import { FaRegCircle, FaRegCheckCircle } from 'react-icons/fa'
 import pb from 'src/lib/pocketbase'
 import { useToast } from '@chakra-ui/react'
-import { Wish } from './Wishlist'
+import { Wish } from '../Wishlist'
 
 interface Props {
 	card: Wish | undefined
@@ -62,7 +62,7 @@ export const DetailsModal: React.FC<Props> = ({ card, onClose, isOpen, fetchWish
 			<ModalContent maxW='700px'>
 				<ModalCloseButton />
 				<ModalBody p={0}>
-					<Box bg='#fff' borderRadius='6px' display='flex' alignItems='center'>
+					<Box bg='transparent' borderRadius='6px' display='flex' alignItems='center'>
 						<Image
 							src={`${import.meta.env.VITE_PB_URL}/api/files/wishes/${card?.id}/${card?.image}`}
 							mixBlendMode='multiply'
