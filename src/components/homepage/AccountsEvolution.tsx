@@ -90,6 +90,23 @@ export const AccountsEvolution: React.FC<Props> = ({ bankAccounts }) => {
 				},
 				borderRadius: Number.MAX_VALUE,
 			},
+			{
+				label: 'Total',
+				data: [
+					(bnpAccount?.last_amount ?? 0) +
+						(boursoAccount?.last_amount ?? 0) +
+						(naloAccount?.last_amount ?? 0),
+					(bnpAccount?.amount ?? 0) + (boursoAccount?.amount ?? 0) + (naloAccount?.amount ?? 0),
+				],
+				backgroundColor: (context: ScriptableContext<'bar'>) => {
+					const ctx = context.chart.ctx
+					const gradient = ctx.createLinearGradient(0, 0, 0, 200)
+					gradient.addColorStop(0, '#d397fa')
+					gradient.addColorStop(1, '#8364e8')
+					return gradient
+				},
+				borderRadius: Number.MAX_VALUE,
+			},
 		],
 	}
 	return <Bar data={data} options={options} />
