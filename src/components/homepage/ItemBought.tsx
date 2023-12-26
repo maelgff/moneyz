@@ -15,7 +15,7 @@ export const ItemBought: React.FC<{ item: Wish }> = ({ item }) => {
 					<Text fontFamily='circular' fontWeight='600' color='#000'>
 						{item?.brand}
 					</Text>
-					<Text fontWeight='200' color='#c0c0c0'>
+					<Text fontWeight='400' color='#c0c0c0'>
 						{item.updated ? new Date(item.updated).toLocaleDateString() : '-'}
 					</Text>
 				</Flex>

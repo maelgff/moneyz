@@ -1,6 +1,5 @@
 import { Flex, Grid, GridItem, Heading, Text } from '@chakra-ui/react'
 import { Menu } from 'src/components/menu/Menu'
-import { Bar } from 'react-chartjs-2'
 import 'chart.js/auto'
 import { useEffect, useState } from 'react'
 import pb from 'src/lib/pocketbase'
@@ -9,6 +8,7 @@ import { ItemBought } from './ItemBought'
 import { Wish } from '../wishlist/Wishlist'
 import { AmountBox } from './AmountBox'
 import { Repartition } from './Repartition'
+import { AccountsEvolution } from './AccountsEvolution'
 
 export type Account = {
 	id?: string
@@ -23,23 +23,6 @@ export type Account = {
 export const Homepage: React.FC<{}> = () => {
 	const [itemsBought, setItemsBought] = useState<ListResult<Wish>>()
 	const [bankAccounts, setBankAccounts] = useState<ListResult<Account>>()
-
-	const labels = ['November', 'December']
-	const data = {
-		labels,
-		datasets: [
-			{
-				label: 'Dataset 1',
-				data: labels.map(() => 1000),
-				backgroundColor: 'rgba(255, 99, 132, 0.5)',
-			},
-			{
-				label: 'Dataset 2',
-				data: labels.map(() => 1000),
-				backgroundColor: 'rgba(53, 162, 235, 0.5)',
-			},
-		],
-	}
 
 	useEffect(() => {
 		fetchBankAccounts()
@@ -79,11 +62,11 @@ export const Homepage: React.FC<{}> = () => {
 							return <AmountBox key={`account-${acc.id}`} account={acc} />
 						})}
 					</Flex>
-					<Heading color='#000' size='sm' mt='50px'>
+					<Heading color='#000' size='sm' mt='50px' mb='10px'>
 						Accounts evolution
 					</Heading>
 					<Flex>
-						<Bar data={data} />
+						<AccountsEvolution bankAccounts={bankAccounts?.items} />
 					</Flex>
 				</GridItem>
 				<GridItem colSpan={2} bg='#fff' p='35px'>
